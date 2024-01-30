@@ -7,6 +7,7 @@ export const ContainerStepOne = styled.div`
     div.cpf-body {
         display: flex;
         align-items: center;
+        gap: 6px;
     }
     a.letter {
         font-size: 10px;

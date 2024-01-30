@@ -11,24 +11,26 @@ export const EventCard = ({ event }: EventCardProps) => {
   if(event?.hide) return <></>
 
   return (
-    <Link className='w-[100%] h-[100%]'
+    <Link className='w-[100%] h-[100%] flex items-center justify-center'
       href={`/evento/${event.id}${(event?.multipleIds && event?.eventosIds) ? `?eventosIds=${event?.eventosIds.join('-')}` : ''}`}
     >
-      <div className='w-[100%] relative flex flex-col overflow-hidden group'>
+      <div className='w-[100%]  max-w-96 relative flex flex-col overflow-hidden group'>
         <div
-          className='w-[100%] h-[100%] relative z-[1] rounded-xl overflow-hidden'
+          className='w-[100%] h-[100%] relative z-[2] rounded-xl overflow-hidden'
         >
-          <div
-            className='w-[100%] min-h-48 h-[100%] bg-background rounded-xl relative z-[2] transition-all duration-500 ease-in-out transform group-hover:scale-105'
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={event.imagens.minicapa.link} alt="Descrição da imagem" 
+            className='w-[100%] h-48 bg-background rounded-xl relative  transition-all duration-500 ease-in-out transform group-hover:scale-105 object-fill'/>
+          {/* <div
             style={{
               backgroundImage: `url(${event.imagens.minicapa.link})`,
-              backgroundSize: 'cover',
+              backgroundSize: '50%',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
               backgroundClip: 'border-box',
             }}
             >
-          </div>
+          </div> */}
           {/* <Image
             className='w-[100%] h-[100%] bg-background rounded-xl relative z-[2] transition-all duration-500 ease-in-out transform group-hover:scale-105'
             src={'/evento-background-1.svg'}
@@ -85,7 +87,7 @@ export const EventCard = ({ event }: EventCardProps) => {
           >
               <Image 
                 className='w-8 h-8'
-                src={ !(event.prioridade === 1) ? '/MoneyIcon.svg' : '/MoneyIcon-gray.svg'}
+                src={ !(event.prioridade === 1) ? '/MoneyIcon.svg' : '/moneyIcon-gray.svg'}
                 alt="Carrinho de compras"
                 width={40}
                 height={40}

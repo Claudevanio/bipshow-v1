@@ -17,6 +17,8 @@ export const AvatarWithTabs = ({
   handleChangeTab: (event: any, tab: number) => void;
 }) => {
   const { user } = useRegister();
+
+  
   return (
     <div className=" hidden items-center p-6  md:block border-r-[1px] border-[#d9cff2] ">
       <div className="w-250 h-250 rounded-full bg-background p-1 bg-gradient">

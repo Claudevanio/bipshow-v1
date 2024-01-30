@@ -216,7 +216,7 @@ export default function EventoPage({ params }: { params: { id: string } }) {
                   </Button>
                 </a>
                 <Button onClick={handleClickShare} variant="secondary">
-                  <Image src={"/Share.svg"} alt="Logo" width={20} height={20} />
+                  <Image src={"/share.svg"} alt="Logo" width={20} height={20} />
                   Compartilhar
                 </Button>
               </div>

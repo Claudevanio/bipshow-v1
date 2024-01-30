@@ -72,6 +72,7 @@ export const StepFour: React.FC = () => {
         </ul>
       </div>
       <Input
+        disabledClean
         type={isTypeView}
         name="senha"
         id="senha"
@@ -94,7 +95,13 @@ export const StepFour: React.FC = () => {
             message: 'A senha deve conter somente números. Verique',
           },
         }}
+        max={6}
+        maxLength={6}
         onChange={(event) => {
+          const isNumber = /^[0-9]+$/;
+          if (!isNumber.test(event.target.value) && event.target.value.length > 0) {
+            return;
+          }
           handleChangePassword(event.target.value);
         }}
         password={{
@@ -105,6 +112,7 @@ export const StepFour: React.FC = () => {
         errorText={formState.errors.senha && formState.errors.senha.message as string}
       />
       <Input
+        disabledClean
         type={isTypeViewConfirmatinPassword}
         name="confirmacaoSenha"
         id="confirmacaoSenha"
@@ -125,7 +133,17 @@ export const StepFour: React.FC = () => {
           value: isTypeViewConfirmatinPassword,
           onClick: () => setIsTypeViewConfirmationPassword(isTypeViewConfirmatinPassword === 'password' ? 'text' : 'password'),
         }}
+        max={6}
+        maxLength={6}
         disabled={isLoading}
+        onChange={(event) => {
+          const isNumber = /^[0-9]+$/;
+          if (!isNumber.test(event.target.value) && event.target.value.length > 0) {
+            return;
+          }
+          setValue('confirmacaoSenha', event.target.value);
+        }
+        }
         errorText={formState.errors.confirmacaoSenha?.message as string}
       />
     </ContainerStepFour>

@@ -200,7 +200,7 @@ export const RegisterProvider: React.FC<{ children: React.ReactNode }> = ({
   const handleLogoutUser = useCallback(() => {
     localStorage.setItem('shouldChangeText', 'true');
     Cache.remove({key: '@tokenUser'})
-    window.location.reload();
+    setIsUser(undefined)
   }, []);
 
   const handleUpdateUser = useCallback(
@@ -240,6 +240,7 @@ export const RegisterProvider: React.FC<{ children: React.ReactNode }> = ({
           )) as { data: { sucesso: boolean; mensagem?: string } };
 
           if (resultData.sucesso) {
+            isUpdatedUser.imagem = isUser.imagem;
             setIsUser(isUpdatedUser);
             callErrorDialogComponent('Dados atualizados com sucesso.', TypeEnum.SUCCESS);
           } else {

@@ -142,24 +142,24 @@ export const Input: React.FC<IInput> = ({
                                 }}
                             >
                                 <Clean
-                                    color="#ffffff"
+                                    color="rgba(0, 0, 0, 0.30)"
                                     width={24}
                                     height={24}
                                 />
                             </IconButton>
-                        )}
+                    )}
                     {password && isValue && (
                         <IconButton onClick={password.onClick}>
                             {rest.type === "text" && (
                                 <Password
-                                    color="#ffffff"
+                                    color="rgba(0, 0, 0, 0.30)"
                                     width={24}
                                     height={24}
                                 />
                             )}
                             {rest.type === "password" && (
                                 <NotVisibled
-                                    color="#ffffff"
+                                    color="rgba(0, 0, 0, 0.30)"
                                     width={24}
                                     height={24}
                                 />

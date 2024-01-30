@@ -92,7 +92,7 @@ export const Footer = () => <footer className="bg-grayLight relative overflow-hi
       </a>
       <a rel="noopener noreferrer" href="https://twitter/usuario" target='_blank' className='flex gap-1 items-center'>
         <Image
-          src={'/Twitter.svg'}
+          src={'/twitter.svg'}
           alt="Logo"
           width={20}
           height={20}
@@ -101,7 +101,7 @@ export const Footer = () => <footer className="bg-grayLight relative overflow-hi
       </a>
       <a rel="noopener noreferrer" href="https://youtube/usuario" target='_blank' className='flex gap-1 items-center'>
         <Image
-          src={'/YouTube.svg'}
+          src={'/Youtube.svg'}
           alt="Logo"
           width={20}
           height={20}
@@ -119,7 +119,7 @@ export const Footer = () => <footer className="bg-grayLight relative overflow-hi
         rel="noopener noreferrer"
       >
         <Image
-          src={'/GooglePlay.svg'}
+          src={'/googlePlay.svg'}
           alt="Logo"
           width={150}
           height={55}

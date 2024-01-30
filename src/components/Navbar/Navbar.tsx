@@ -115,12 +115,17 @@ export function Navbar() {
                   className='text-sm text-primary font-medium'
                 >Eventos próximos à</p>
                 <div
-                  className='text-textPrimary font-medium w-48'>
-                    <span className='text-textPrimary font-medium max-w-40 min-w-40 text-ellipsis'>
-                      {(locationValue.city !== null && locationValue.city !== undefined && locationValue.city !== '') ? locationValue.city : 'Sua localização'}, {locationValue.uf ? locationValue.uf : 'UF'}
-                    </span>
+                  className='text-textPrimary font-medium w-48 flex items-center gap-0'>
+                    <div className='text-textPrimary font-medium max-w-40 min-w-40 text-ellipsis flex items-center'>
+                      <p
+                        className='max-w-32 overflow-hidden text-ellipsis whitespace-nowrap inline-block h-fit'
+                      >
+                      {(locationValue.city !== null && locationValue.city !== undefined && locationValue.city !== '') ? locationValue.city : 'Sua localização'}
+                      </p>
+                      , {locationValue.uf ? locationValue.uf : 'UF'}
+                    </div>
                     <ArrowDropDown
-                      className='text-primary mb-1 cursor-pointer'
+                      className='text-primary mb-1 ml-[-8px] cursor-pointer'
                       onClick={e => setAnchorEl(e.currentTarget)}
                     />
                     <Menu

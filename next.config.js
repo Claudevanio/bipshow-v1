@@ -8,7 +8,7 @@ const nextConfig = {
     BASE_URL_IMAGES: 'https://uzerticket.com.br',
   },
   images: {
-    domains: ['uzerpass-imagens.s3.sa-east-1.amazonaws.com'],
+    domains: ['uzerpass-imagens.s3.sa-east-1.amazonaws.com', 'uzerticket-imagens.s3.sa-east-1.amazonaws.com'],
   },
   swcMinify: true
 }

@@ -93,6 +93,8 @@ export const ContainerLogin = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    min-width: 18rem;
+    max-width: 18rem;
     margin: 0;
   }
 

@@ -25,7 +25,7 @@ export const TelefoneMaskWithoutDDD = (v: string) => {
     .replace(/\D/g, '')
     .replace(/(\d{5})(\d{4})/, '$1-$2');
 
-  return isValue.substring(0, 11);
+  return isValue.substring(0, 10);
 };
 
 export const DATEMaskStart = (v: string) => {

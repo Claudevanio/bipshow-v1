@@ -207,6 +207,7 @@ export const StepOne: React.FC = () => {
       
       <div className="email-input-body">
           <Input
+              disabledClean
               type="email"
               name="email"
               id="email"
@@ -239,6 +240,7 @@ export const StepOne: React.FC = () => {
       </div>
       {!typesDoc && (
         <Input
+          disabledClean
           type="tel"
           name="CPF"
           id="CPF"
@@ -279,6 +281,7 @@ export const StepOne: React.FC = () => {
         typesDoc.find((typeDoc) => typeDoc.nomeTipoDocumento === "CPF") && (
           <div className="cpf-body">
             <Input
+              disabledClean
               type="tel"
               name="CPF"
               id="CPF"
@@ -334,7 +337,7 @@ export const StepOne: React.FC = () => {
               }}
               >
                 <p
-                  className='text-xs cursor-pointer'
+                  className='text-xs cursor-pointer text-center'
                 >Trocar CPF</p>
               </div>
             )}
@@ -422,10 +425,12 @@ export const StepOne: React.FC = () => {
           dataInvalida ? ("Data não confere com o cpf informado." as string) : 
           ("Data de nascimento inválida. Verifique" as string))
         }
+        disabledClean
       />
       
       <div className="phone">
                         <Input
+                            disabledClean
                             type="tel"
                             name="DDD"
                             id="DDD"
@@ -449,6 +454,7 @@ export const StepOne: React.FC = () => {
                         />
                         {selectCountry.nomePais === "Brasil" ? (
                             <Input
+                                disabledClean
                                 type="tel"
                                 name="telefone"
                                 id="telefone"
@@ -471,6 +477,8 @@ export const StepOne: React.FC = () => {
                                         message: "Telefone inválido. Verifique",
                                     },
                                 }}
+                                max={10}
+                                maxLength={10}
                                 disabled={isLoading}
                                 mask={TelefoneMaskWithoutDDD}
                                 errorText={
@@ -481,6 +489,7 @@ export const StepOne: React.FC = () => {
                             />
                         ) : (
                             <Input
+                                disabledClean
                                 type="tel"
                                 name="telefone"
                                 id="telefone"

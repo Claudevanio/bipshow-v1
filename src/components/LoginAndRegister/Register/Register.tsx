@@ -169,7 +169,7 @@ export const Register: React.FC<IRegister> = ({
             {isStepper === 3 && <StepFour />}
 
             {isStepper === 4 && <StepFive />}
-            {!toPhoto ? (
+            {!toPhoto && !(isStepper === 4 && !photoAvatar) ? (
               <div
                 className={`${
                   isStepper >= 0
@@ -212,7 +212,7 @@ export const Register: React.FC<IRegister> = ({
                         isStepper === 4
                           ? photoInvalida === 400
                             ? 'Nova foto'
-                            : 'Finalizar cadastro'
+                            : 'Finalizar'
                           : 'Avançar'
                         }
                       disabled={

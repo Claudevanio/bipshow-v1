@@ -131,6 +131,7 @@ export const StepThree: React.FC = () => {
   return (
     <ContainerStepThree>
       <Input
+        disabledClean
         type="tel"
         name="endereco.cep"
         id="endereco.cep"
@@ -170,6 +171,7 @@ export const StepThree: React.FC = () => {
         errorText={formState.errors.endereco && (formState.errors.endereco as { cep: any }).cep && (formState.errors.endereco as { cep: any }).cep.message}
       />
       <Input
+        disabledClean
         type="text"
         name="endereco.logradouro"
         id="endereco.logradouro"
@@ -185,6 +187,7 @@ export const StepThree: React.FC = () => {
       />
       <div className="complement-number">
         <Input
+          disabledClean
           type="text"
           name="endereco.complemento"
           id="endereco.complemento"
@@ -213,6 +216,7 @@ export const StepThree: React.FC = () => {
         />
       </div>
       <Input
+        disabledClean
         type="text"
         name="endereco.bairro"
         id="endereco.bairro"
@@ -227,7 +231,7 @@ export const StepThree: React.FC = () => {
         errorText={formState.errors.endereco && (formState.errors.endereco as { bairro: any }).bairro && (formState.errors.endereco as { bairro: any }).bairro.message}
       />
       <div className="state-city">
-        <Select
+        <Select 
           name="endereco.estado"
           id="endereco.estado"
           loading={isLoadingState}
@@ -245,7 +249,7 @@ export const StepThree: React.FC = () => {
             setValue('endereco.estado', event.target.value);
           }}
         />
-        <Select
+        <Select 
           loading={isLoadingCity}
           name="endereco.cidade.id"
           id="endereco.cidade.id"

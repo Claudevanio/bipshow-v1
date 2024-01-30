@@ -5,6 +5,8 @@ export const ContainerStepFour = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 18rem;
+    max-width: 18rem;
     div.help {
         width: fit-content;
         width: 100%;
