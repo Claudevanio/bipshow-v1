@@ -4,14 +4,14 @@ import Image from 'next/image';
 
 export const Footer = () => <footer className="bg-grayLight relative overflow-hidden">
   <Image
-    className='opacity-80 hidden lg:flex absolute w-[100%] left-[-50%] top-0'
+    className='opacity-80 hidden lg:flex absolute w-[100%] left-[-50%] top-0 pointer-events-none'
     src='/FooterBackground-1.svg'
     alt="background"
     width={2000}
     height={2000}
   />
   <Image
-    className='opacity-80 hidden absolute lg:flex w-[100%] left-[20%] bottom-[-10%] rotate-[-7deg] object-contain'
+    className='opacity-80 hidden absolute lg:flex w-[100%] left-[20%] bottom-[-10%] rotate-[-7deg] pointer-events-none object-contain'
     src='/FooterBackground-2.svg'
     alt="background"
     width={2000}
@@ -27,21 +27,21 @@ export const Footer = () => <footer className="bg-grayLight relative overflow-hi
       height={200}
     />
   </div>
-<div className="container grid grid-cols-1 mx-auto p-6 gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-4">
+<div className="container grid grid-cols-1 mx-auto p-6 relative z-[5] gap-x-3 gap-y-8 sm:grid-cols-3 md:grid-cols-4">
   <div className="flex flex-col space-y-4">
     <h2 className="font-medium text-primary">Go - Goiânia</h2>
     <div className="flex flex-col space-y-2 text-sm dark:text-gray-400">
       <p
         className='text-textPrimary font-medium'
       >
-        (00) 0000-0000 <br/> 
+        (62) 3241-0541 <br/> 
         contato@bipshow.com.br
       </p>
       <p
         className='text-textTertiary text-sm tracking-tighter'
       >
-      Av Jamel Cecílio, 2690 Ed. Metropolitan Tokyo. <br/>
-      Salas 606 e 607, Jd Goiás 74810-000
+      Av.Dep.Jamel Cecilio, 2690 Sala 606 e 607 <br/>
+      Ed. Metropolitan Tokyo- Jd.Goiás, Goiânia - GO - CEP 74810-100
       </p>
     </div>
   </div>
@@ -141,6 +141,6 @@ export const Footer = () => <footer className="bg-grayLight relative overflow-hi
   </div>
 </div>
 <div className="flex items-center w-full relative z-[2] bg-green justify-center px-6 py-6 text-sm">
-  <span className="text-background">Uzer Tecnologia ME - 24.027.271/0001-07 ® UzerTICKET É UMA marca registrada com os direitos reservados.</span>
+  <span className="text-background">Uzer Soluções e Tecnologia Ltda - CNPJ: 50.325.987/0001-92- Bipshow é um marca registrada com os direitos autorais.</span>
 </div>
 </footer>
