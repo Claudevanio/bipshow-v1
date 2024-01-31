@@ -85,6 +85,8 @@ export default function Home() {
         return evento.localidade.includes(location.uf)
       })
       setFilteredList([...events])
+    } else {
+      setFilteredList(undefined)
     }
   }, [location, eventos])
 
@@ -227,6 +229,17 @@ export default function Home() {
             height={30}
             />
           Todos os eventos
+        {
+          categoryFilter && <button
+            className='text-primary font-normal text-xs ml-8 self-center hover:underline'
+            onClick={() => {
+              setCategoryFilter(undefined)
+              setFilteredList(undefined)
+            }}
+          >
+            Limpar Categoria
+          </button>
+        }
         </h2>
         <p
           className={fontMontSerrat.className + 'md:text-2xl text-sm flex gap-2 items-center font-bold text-textPrimary'}

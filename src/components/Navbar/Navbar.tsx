@@ -133,7 +133,7 @@ export function Navbar() {
                       anchorEl={anchorEl}
                       onClose={() => setAnchorEl(null)}
                       sx={{
-                        marginLeft: '-8rem',
+                        marginLeft: '-10rem',
                         '.MuiMenu-paper': {
                           width: '24rem',
                           height: '50rem',
@@ -164,18 +164,24 @@ export function Navbar() {
                             <Autocomplete
                               disablePortal
                               // disable clearable
-                              clearIcon={null}
+                              // clearIcon={null}
                               value={estadosArray.find(estado => estado.sigla === locationValue.uf)}
                               options={estadosArray}
                               getOptionLabel={(option) => option.sigla}
                               onChange={(e:any, newValue: any) => {
+                                if(!newValue){
+                                  setLocationValue({city: '', uf: ''}) 
+                                  setLocation({city: '', uf: ''})
+                                  Cache.remove({key: 'location'})
+                                  return
+                                }
                                 setLocationValue({city: '', uf: newValue.sigla}) 
                                 setLocation({city: '', uf: newValue.sigla})
                               }}
-                              sx={{ width: '4rem', position: 'relative', zIndex: 9999, // Adicione zIndex aqui
+                              sx={{ width: '7rem', position: 'relative', zIndex: 9999, // Adicione zIndex aqui
                               '& .MuiAutocomplete-popper': { zIndex: 9999 } // Adicione zIndex para o popper
                               }}
-                              renderInput={(params) => <Input {...params} sx={{width: '4rem'}} variant='outlined' />}
+                              renderInput={(params) => <Input {...params} sx={{width: '7rem'}} variant='outlined' />}
                             />
                           </div>
                           <div

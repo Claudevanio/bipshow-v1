@@ -68,9 +68,11 @@ export const Register: React.FC<IRegister> = ({
     DDD: string;
   }
 
-  const { handleSubmit, getValues, setValue } = useFormContext<IRegisterUser>();
+  const { handleSubmit, getValues, setValue, watch } = useFormContext<IRegisterUser>();
   // const [formData, setFormData] = useState();
   const pathname = usePathname();
+
+  const gender = watch('gender');
 
   const onSubmit = React.useCallback(
     async (data: IUser) => {
@@ -181,7 +183,7 @@ export const Register: React.FC<IRegister> = ({
                     : 'is-stepper-one-btn-custom'
                 }`}
               >
-                {isStepper >= 0 && isStepper <= 4 && (
+                {isStepper >= 0 && (isStepper <= 4) && !(isStepper === 4 && photoAvatar) && (
                 <ButtonBack
                   onClick={() => {
                     if(isStepper === 0 && handleChangeType) {
@@ -226,7 +228,8 @@ export const Register: React.FC<IRegister> = ({
                         }
                       disabled={
                         isLoading
-                        || (!emailValidado
+                        || !gender || 
+                        (!emailValidado
                             && isStepper === 2
                             && validateEmail)
                             || (isStepper === 4 && !photoAvatar)

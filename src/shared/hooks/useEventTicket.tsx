@@ -16,6 +16,7 @@ import { useTickets } from './useTickets';
 import { useOrders } from './useOrders';
 import { IPlace, ISector, ITicket, ITicketPurchase, IValuePerTypePayment, TicketSelectUserProps, IEventTicket as IEventTicketProps, IOrder } from '@/types';
 import { toast } from 'react-toastify';
+import dayjs from 'dayjs';
 
 export type SelectedChairProps = {
   nome: string,
@@ -252,7 +253,7 @@ export const EventTicketProvider: React.FC<{ children: React.ReactNode }> = ({ c
                 ...item,
               },
             ],
-            data: new Date(),
+            data: item?.dias && item?.dias.length > 0 ? new Date(item?.dias[0]) : new Date(dayjs(data?.dataRealizacao?.split(' ')[0]).add(2, 'hours') as any) ?? new Date(dayjs(data?.dataRealizacao?.split(' ')[0]).add(2, 'hours')  as any) ,
             cor: setorCor?.cor,
             idSector: item.setor?.id,
           };
@@ -261,7 +262,7 @@ export const EventTicketProvider: React.FC<{ children: React.ReactNode }> = ({ c
             nome: item.categoriaVenda,
             tiposDeIngresso: [item],
             valores: [Number(item.valorUnitario)],
-            data: new Date(),
+            data: item?.dias && item?.dias.length > 0 ? new Date(item?.dias[0]) : new Date(dayjs(data?.dataRealizacao?.split(' ')[0]).add(2, 'hours')  as any)?? new Date(dayjs(data?.dataRealizacao?.split(' ')[0]).add(2, 'hours')  as any),
             cor: setorCor?.cor,
             idSector: item.setor?.id,
           });

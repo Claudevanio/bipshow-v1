@@ -9,6 +9,7 @@ import { TypeEnum, useError } from '@/shared/hooks/useDialog';
 import { CameraDetectionProps } from './interface';
 import { Close, RotateRight } from '@mui/icons-material';
 import { Button } from '@/components/Form/Button';
+import { ButtonBack } from '@/components/ButtonBack';
 
 export const CameraDetection: React.FC<CameraDetectionProps> = ({ setIsImageSrc }) => {
   const { onToPhoto } = useAuth();
@@ -85,13 +86,20 @@ export const CameraDetection: React.FC<CameraDetectionProps> = ({ setIsImageSrc 
         />
       ))} */}
       
-      <Button
-          text="Tirar foto"
-          variant="medium"
-          type="button"
-          onClick={capture}
-        />
-      <div className="actions margin">
+      <div
+            className='w-full flex items-center gap-4'
+          >
+            <ButtonBack
+              onClick={() => onToPhoto(false)}
+            />
+            <Button
+                text="Tirar foto"
+                variant="medium"
+                type="button"
+                onClick={capture}
+              />
+          </div>
+      <div className="hidden">
         {/* <button type="button" className="not-photo" onClick={() => onToPhoto(false)}>
           <Close width={24} height={24} className='text-danger' />
         </button> */}

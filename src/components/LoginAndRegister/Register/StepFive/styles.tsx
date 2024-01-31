@@ -5,14 +5,12 @@ export const ContainerStepFive = styled.div<{
 }>`
     p.title {
         font-size: 20px;
-        font-family: "Montserrat";
         font-style: normal;
         font-weight: 500;
         color: rgba(0, 0, 0, 0.87);
     }
 
     p.body {
-        font-family: "Roboto";
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
@@ -33,6 +31,7 @@ export const ContainerStepFive = styled.div<{
             width: 100%;
             display: flex;
             flex-direction: column;
+            font-size: 0.875rem;
             gap: ${({ theme }) => theme.spacing(3)};
             li {
                 width: 100%;
@@ -40,12 +39,10 @@ export const ContainerStepFive = styled.div<{
                 justify-content: space-between;
                 align-items: center;
                 p {
-                    width: 75%;
                     font-size: ${({ theme }) => ".875rem"};
-                    
                     font-style: normal;
                     font-weight: 500;
-                    color: ${({ theme }) => "#E3E3E3"};
+                    color: rgba(0, 0, 0, 0.6);
                 }
             }
         }

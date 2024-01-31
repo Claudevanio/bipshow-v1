@@ -12,51 +12,64 @@ import { Warning } from '@/components/icons/Warning';
 import { Danger } from '@/components/icons/Danger';
 import { FaceDetectionComponent } from './FaceDetection';
 import { ContainerStepFive } from './styles';
+import { ButtonBack } from '@/components/ButtonBack';
 
 export const StepFive: React.FC = () => {
   const {
-    toPhoto, photoAvatar, onAddPhoto, photoInvalida,
+    toPhoto, photoAvatar, onAddPhoto, photoInvalida, onToPhoto,  setIsStepper, isStepper
   } = useAuth();
 
   return (
     <ContainerStepFive variant={photoInvalida}>
-      {!photoAvatar && <FaceDetectionComponent />}
-      {/* {!toPhoto && !photoAvatar && (
+      {!photoAvatar && toPhoto && <FaceDetectionComponent />}
+      {!toPhoto && !photoAvatar && (
         <div className="help">
-          <h6 className="title">Dicas para uma foto eficiente</h6>
-          <ul>
+          <ul
+            style={{
+              listStyle:'circle !important',
+            }}
+          >
             <li>
-              <Photo />
               <p>
                 Faça a foto em um fundo claro e sem texturas
                 diferentes (ex.: parede)
               </p>
             </li>
             <li>
-              <PhotoTwo />
               <p>
                 Procure um lugar bem iluminado, mas evite tirar
                 fotos com foco de luz atrás da pessoa
               </p>
             </li>
             <li>
-              <PhotoThree />
               <p>
                 Não utilize acessórios, como óculos, máscara,
                 boné etc.
               </p>
             </li>
             <li>
-              <PhotoFour />
               <p>
                 Enquadre somente o rosto de frente na foto, sem
                 sorrir
               </p>
             </li>
           </ul>
+          <div
+            className='w-full mt-4 flex items-center gap-4'
+          >
+            <ButtonBack
+              onClick={() => setIsStepper(isStepper - 1)}
+            />
+            <Button
+              className='w-full'
+              type="button"
+              text="Tirar foto"
+              onClick={() => onToPhoto(true)}
+              />
+          </div>
         </div>
-      )} */}
-      {photoAvatar && (
+      )}
+      {photoAvatar &&  (
         <div className="photo-avatar-confirm">
           <div className="avatar">
             <img src={photoAvatar} alt="Foto do rosto" />
@@ -84,12 +97,12 @@ export const StepFive: React.FC = () => {
               )}
             </div> */}
           </div>
-          <Button
+          {/* <Button
             type="button"
             text="Alterar foto"
             variant="outline"
             onClick={() => onAddPhoto(undefined)}
-          />
+          /> */}
           <div className="texts">
             <p className="title">
               {' '}

@@ -21,12 +21,22 @@ export const Input: React.FC<IInput> = ({
     isCpf,
     disabledClean,
     onClean,
+    ref,
+    pseudoDisabled,
     ...rest
 }) => {
     const { control, setValue, watch } = useFormContext();
     const [isFocused, setIsFocused] = useState<boolean>(false);
     const isValue = watch(name);
     const inputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(()=>{
+        if(!inputRef.current || !ref) return;
+        debugger;
+
+        ref && ref(inputRef.current)
+
+    },[inputRef])
 
     // useEffect(() => {
     //     if (isValue) {
@@ -96,6 +106,7 @@ export const Input: React.FC<IInput> = ({
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
                         onChange={(e) => {
+                            if(pseudoDisabled) return;
                             if (mask) {
                                 field.onChange(mask(e.target.value));
                             } else {

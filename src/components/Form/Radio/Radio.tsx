@@ -23,7 +23,9 @@ export const Radio: React.FC<IRadio> = ({
         control={control}
         render={({ field: { name, onChange } }) => (
           <ContainerRadio className={`form-check ${remainColor ? 'remain-color' : ''}`}>
-            <input className="form-check-input" name={name} type="radio" id={`${id}-${rest.value}`} value={rest.value} onChange={onChange} {...rest} />
+            <input className="form-check-input" name={name} type="radio" id={`${id}-${rest.value}`} value={rest.value}
+            checked={control._getWatch(name) === rest.value}
+            onChange={onChange} {...rest} />
             <label className={`form-check-label ${remainColor ? 'remain-color' : ''}`} htmlFor={`${id}-${rest.value}`}
               style={{
                 paddingTop: 0,

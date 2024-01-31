@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { Input } from "@/components/Form/Input";
 import { cpf, data, telefone, telefoneWithoutDDD } from "@/shared/config/regex";
@@ -16,7 +16,7 @@ import { findFlagUrlByIso2Code } from "country-flags-svg";
 import { validateCPF } from "@/shared/config/validateCPF";
 
 export const StepOne: React.FC = () => {
-  const { formState, watch, setValue, getValues } = useFormContext();
+  const { formState, watch, setValue, getValues, setFocus } = useFormContext();
   const {
     isLoading,
     countries,
@@ -44,9 +44,13 @@ export const StepOne: React.FC = () => {
 
   const isEmail = watch("email");
 
+  const gender = watch("gender")
+
+  const dataNascimentoRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
       if (defaultValues?.email) {
-          debugger;
+          
           setHaveEmail(true);
           setValue("email", defaultValues?.email);
           setEmail(defaultValues?.email);
@@ -71,8 +75,9 @@ export const StepOne: React.FC = () => {
   }, [email, isEmail]);
 
   useEffect(() => {
+    
+
     const fetchData = async () => {
-      debugger;
       if (defaultValues?.CPF) {
         setHaveCpf(true);
         setValue("CPF", defaultValues?.CPF);
@@ -87,11 +92,23 @@ export const StepOne: React.FC = () => {
         setNascimentoCpf(
           format(parseISO(usuario?.dataNascimento), "dd/MM/yyyy")
         );
+          
+        
       }
     };
 
     fetchData();
   }, [isCpf]);
+
+  useEffect(() => {
+    if(!haveCpf)
+      return
+    debugger;
+    setTimeout(() => {
+      dataNascimentoRef.current?.firstChild?.dispatchEvent(new Event('blur', { bubbles: true }));
+    }, 3000);
+
+  }, [haveCpf]);
 
 
   useEffect(() => {
@@ -125,6 +142,8 @@ export const StepOne: React.FC = () => {
     return isAfterDateNow && sameDate;
   };
 
+  const [cpfInputRef, setCpfInputRef] = useState<HTMLInputElement | null>(null);
+
   const handleChangeCountry = (e: any) => {
     setValue("idPais", +e.target.value);
     // debugger;
@@ -136,7 +155,7 @@ export const StepOne: React.FC = () => {
 
   useEffect(() => {
     if (isCountry) {
-      debugger;
+      
       onLoadTypeDocument(isCountry);
       const isFindCountry = countries?.find(
         (country) => country.id === isCountry
@@ -350,7 +369,12 @@ export const StepOne: React.FC = () => {
                   return true;
                 }
               }}
-              disabled={isLoading || haveCpf}
+              style={{
+                pointerEvents: (isLoading || haveCpf) ? 'none' : 'auto',
+                opacity: (isLoading || haveCpf) ? 0.5 : 1,
+              }}
+              pseudoDisabled={isLoading || haveCpf}
+              disabled={false}
               mask={CPFMask}
               errorText={
                 formState.errors.CPF && (formState.errors.CPF.message as string)
@@ -432,40 +456,46 @@ export const StepOne: React.FC = () => {
           }
         />
       )}
-      <Input
-        type="tel"
-        name="dataNascimento"
-        id="dataNascimento"
-        label="Data de nascimento"
-        rules={{
-          max: {
-            value: 10,
-            message: "Data de nascimento inválida. Verifique",
-          },
-          min: {
-            value: 10,
-            message: "Data de nascimento inválida. Verifique",
-          },
-          minLength: {
-            value: 10,
-            message: "Data de nascimento inválida. Verifique",
-          },
-          required: {
-            value: true,
-            message: "Data de nascimento inválida. Verifique",
-          },
-          validate: wrongDate,
-          pattern: data,
-        }}
-        mask={DATEMaskStart}
-        disabled={isLoading}
-        errorText={
-          formState.errors.dataNascimento && (
-          dataInvalida ? ("Data não confere com o cpf informado." as string) : 
-          ("Data de nascimento inválida. Verifique" as string))
-        }
-        disabledClean
-      />
+      <div
+        className='w-full h-fit'
+        ref={dataNascimentoRef}
+      >
+        <Input
+          type="tel"
+          name="dataNascimento"
+          id="dataNascimento"
+          label="Data de nascimento"
+          rules={{
+            max: {
+              value: 10,
+              message: "Data de nascimento inválida. Verifique",
+            },
+            min: {
+              value: 10,
+              message: "Data de nascimento inválida. Verifique",
+            },
+            minLength: {
+              value: 10,
+              message: "Data de nascimento inválida. Verifique",
+            },
+            required: {
+              value: true,
+              message: "Data de nascimento inválida. Verifique",
+            },
+            validate: wrongDate,
+            pattern: data,
+          }}
+          mask={DATEMaskStart}
+          disabled={isLoading}
+          errorText={
+            formState.errors.dataNascimento && (
+            dataInvalida ? ("Data não confere com o cpf informado." as string) : 
+            ("Data de nascimento inválida. Verifique" as string))
+          }
+          disabledClean
+        />
+      </div>
+
       
       <div className="phone">
                         <Input
@@ -562,7 +592,8 @@ export const StepOne: React.FC = () => {
         <div
           className='flex flex-col'
         >
-          <Radio id="gender" name="gender" label="Masculino" value="0" />
+          <Radio id="gender" name="gender" label="Masculino" value="0"
+          />
           <Radio id="gender" label="Feminino" name="gender" value="1" />
           <Radio id="gender" label="Não informar" name="gender" value="2" />
         </div>

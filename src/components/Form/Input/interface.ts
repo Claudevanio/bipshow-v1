@@ -20,4 +20,6 @@ export interface IInput extends InputHTMLAttributes<HTMLInputElement> {
     defaultValue?: string;
     disabledClean?: boolean
     onClean?: () => void;
+    pseudoDisabled?: boolean;
+    ref?: any;
 }
