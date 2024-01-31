@@ -88,7 +88,7 @@ export const Login: React.FC<ILogin> = ({
   };
 
   const onSubmit = (data: any) => {
-    // debugger;
+    debugger;
     
     if (isCpf) {
       data.cpf = data.emailOrCpf;
@@ -141,6 +141,19 @@ export const Login: React.FC<ILogin> = ({
   };
 
   const cpfOrEmailValid = React.useCallback(() => {
+    if(!isWatchEmailOrCpf)
+      return
+    if(isWatchEmailOrCpf.length == 0) return false;
+    if(isWatchEmailOrCpf.length > 0 ){
+      // is 1st letter a number?
+      const firstLetterNumberRegex = /^\d/;
+      if(firstLetterNumberRegex.test(isWatchEmailOrCpf)){
+        setIsCpf(true);
+      } else{
+        setIsCpf(false);
+      }
+    }
+
     const firstLetterNumberRegex = /^\d/;
 
     if (!isCpf && !firstLetterNumberRegex.test(isWatchEmailOrCpf)) {
@@ -197,6 +210,8 @@ export const Login: React.FC<ILogin> = ({
       setIsStepper(2);
     }
   }, [user, setIsStepper]);
+
+  const formRef = React.useRef<HTMLFormElement>(null);
 
   const LoginContainer = (
     <>
@@ -281,10 +296,13 @@ export const Login: React.FC<ILogin> = ({
               </div>
             )}
             {(!userNotExist || notUserPhoto) && (
-              <form onSubmit={methods.handleSubmit(onSubmit)}>
+              <form 
+                onSubmit={methods.handleSubmit(onSubmit)}
+                ref={formRef}
+              >
                 {identificado() && (
                   <div
-                    className="body-before-login"
+                    className="body-before-login flex items-center"
                     style={{ textAlign: 'center' }}
                   >
                     <div>
@@ -308,17 +326,17 @@ export const Login: React.FC<ILogin> = ({
                     </div>
                     <div>Olá! É bom te ver novamente</div>
                     <div>
-                      <div className="text-password">
+                      <div className="text-password h-24">
                         Bem-vindo(a) de volta. Para fazer o login, clique em
                         prosseguir.
                       </div>
                     </div>
                     <div className="forgot-password">
-                      <Button
+                      {/* <Button
                         text="NÃO LEMBRO DO MEU CADASTRO"
                         variant="outline-text"
                         onClick={handleForgotAccount}
-                      />
+                      /> */}
                     </div>
                     <div className="buttons">
                       <ButtonBack
@@ -434,37 +452,40 @@ export const Login: React.FC<ILogin> = ({
                             name="emailOrCpf"
                             id="emailOrCpf"
                             label="CPF ou Email"
-                            rules={
-                                isCpf
-                                  ? {
-                                    required: {
-                                      value: true,
-                                      message: 'CPF inválido. Verifique',
-                                    },
-                                    minLength: {
-                                      value: 14,
-                                      message: 'CPF inválido. Verifique',
-                                    },
-                                    maxLength: {
-                                      value: 14,
-                                      message: 'CPF inválido. Verifique',
-                                    },
-                                    pattern: {
-                                      value: cpf,
-                                      message: 'CPF inválido. Verifique',
-                                    },
-                                  }
-                                  : {
-                                    required: {
-                                      value: true,
-                                      message: 'E-mail inválido. Verifique',
-                                    },
-                                    pattern: {
-                                      value: email,
-                                      message: 'E-mail inválido. Verifique',
-                                    },
-                                  }
-                              }
+                            //disable autocomplete
+                            autoComplete="off" 
+
+                            // rules={
+                            //     isCpf
+                            //       ? {
+                            //         required: {
+                            //           value: true,
+                            //           message: 'CPF inválido. Verifique',
+                            //         },
+                            //         minLength: {
+                            //           value: 14,
+                            //           message: 'CPF inválido. Verifique',
+                            //         },
+                            //         maxLength: {
+                            //           value: 14,
+                            //           message: 'CPF inválido. Verifique',
+                            //         },
+                            //         pattern: {
+                            //           value: cpf,
+                            //           message: 'CPF inválido. Verifique',
+                            //         },
+                            //       }
+                            //       : {
+                            //         required: {
+                            //           value: true,
+                            //           message: 'E-mail inválido. Verifique',
+                            //         },
+                            //         pattern: {
+                            //           value: email,
+                            //           message: 'E-mail inválido. Verifique',
+                            //         },
+                            //       }
+                            //   }
                             setIsCpf={handleCpf}
                             defaultValue={user?.emailOrCpf}
                             disabled={isLoading}
@@ -514,7 +535,6 @@ export const Login: React.FC<ILogin> = ({
                             text={isTypeButton.text}
                             type="submit"
                             variant="medium"
-                            className="submit"
                             disabled={
                               isLoading ? isLoading : isTypeButton.disabled
                             }
@@ -675,6 +695,7 @@ export const Login: React.FC<ILogin> = ({
                   <ButtonBack
                     onClick={() => {
                       setUserNotExist(false);
+                      
                       setIsStepper(0);
                     }}
                   />

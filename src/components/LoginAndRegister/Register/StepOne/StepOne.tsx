@@ -36,7 +36,7 @@ export const StepOne: React.FC = () => {
   const [haveCpf, setHaveCpf] = useState<boolean>(false);
   const [dataInvalida, setDataInvalida] = useState<boolean>(false);
   const [nascimentoCpf, setNascimentoCpf] = useState<string>("");
-  const [showNome, setShowNome] = useState<boolean>(true);
+  const [showNome, setShowNome] = useState<boolean>(false);
   const [ddd, setDDD] = useState<string>("");
 
   const [email, setEmail] = useState<string>("");
@@ -46,6 +46,7 @@ export const StepOne: React.FC = () => {
 
   useEffect(() => {
       if (defaultValues?.email) {
+          debugger;
           setHaveEmail(true);
           setValue("email", defaultValues?.email);
           setEmail(defaultValues?.email);
@@ -71,6 +72,7 @@ export const StepOne: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      debugger;
       if (defaultValues?.CPF) {
         setHaveCpf(true);
         setValue("CPF", defaultValues?.CPF);
@@ -123,10 +125,18 @@ export const StepOne: React.FC = () => {
     return isAfterDateNow && sameDate;
   };
 
-  const handleChangeCountry = (e: any) => { };
+  const handleChangeCountry = (e: any) => {
+    setValue("idPais", +e.target.value);
+    // debugger;
+    // setValue("idPais", +e.target.value);
+    // // onSelectCountry(countries?.find((country) => country.id === e.target.value));
+    // setValue("DD", countries?.find((country) => country.id === e.target.value)?.codigoArea);
+    // setShowNome(true);
+   };
 
   useEffect(() => {
     if (isCountry) {
+      debugger;
       onLoadTypeDocument(isCountry);
       const isFindCountry = countries?.find(
         (country) => country.id === isCountry
@@ -147,8 +157,34 @@ export const StepOne: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCountry]);
 
+  
+
   return (
     <ContainerStepOne>
+
+      
+          <Select
+              name="idPais"
+              id='idPais'
+              defaultValue={selectCountry.id}
+              disabled={haveCpf}
+              loading={false}
+              label="País"
+              onChange={handleChangeCountry}
+              options={
+                countries?.map((country) => ({
+                  value: country.id,
+                  innerText: country.nomePais,
+                })) ?? []
+              }
+              rules={{
+                required: {
+                  value: true,
+                  message: 'País inválido. Verifique',
+                },
+              }}
+      />
+      
       {/* <SelectModal
         name="idPais"
         id="idPais"
@@ -274,6 +310,7 @@ export const StepOne: React.FC = () => {
           errorText={
             formState.errors.CPF && (formState.errors.CPF.message as string)
           }
+          defaultValue={defaultValues?.CPF ?? ""}
         />
       )}
       {typesDoc &&
@@ -318,6 +355,7 @@ export const StepOne: React.FC = () => {
               errorText={
                 formState.errors.CPF && (formState.errors.CPF.message as string)
               }
+              defaultValue={defaultValues?.CPF ?? ""}
             />
 
             {haveCpf && (
@@ -330,7 +368,6 @@ export const StepOne: React.FC = () => {
               <div className="letter"
               onClick={() => {
                 setValue("CPF", "");
-                setShowNome(true);
                 setHaveCpf(false);
                 setValue("nome", "");
                 setNascimentoCpf("");
@@ -357,6 +394,7 @@ export const StepOne: React.FC = () => {
             }))}
           />
           <Input
+            disabledClean
             disabled={isLoading || loadingCountry}
             id="numeroDoc"
             label="Nº do documento"
@@ -375,8 +413,9 @@ export const StepOne: React.FC = () => {
           />
         </React.Fragment>
       )}
-      {/* {showNome && (
+      {showNome && (
         <Input
+          disabledClean
           type="text"
           name="nome"
           id="nome"
@@ -392,7 +431,7 @@ export const StepOne: React.FC = () => {
             formState.errors.nome && (formState.errors.nome.message as string)
           }
         />
-      )} */}
+      )}
       <Input
         type="tel"
         name="dataNascimento"
@@ -505,11 +544,11 @@ export const StepOne: React.FC = () => {
                                     },
                                 }}
                                 disabled={isLoading}
-                                errorText={
-                                    formState.errors.telefone &&
-                                    (formState.errors.telefone
-                                        .message as string)
-                                }
+                                // errorText={
+                                //     formState.errors.telefone &&
+                                //     (formState.errors.telefone
+                                //         .message as string)
+                                // }
                             />
                         )}
                     </div>

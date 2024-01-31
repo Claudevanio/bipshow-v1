@@ -103,7 +103,7 @@ export const Input: React.FC<IInput> = ({
                             }
                             if(e.target.value.length <= 1 && setIsCpf){                       
                                 if (setIsCpf) {
-                                    debugger;
+                                    // debugger;
                                     const firstLetterNumber = /^\d/;
                                     if (firstLetterNumber.test(e.target.value)) {
                                         setIsCpf(true);

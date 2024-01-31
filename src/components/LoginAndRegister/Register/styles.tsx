@@ -11,11 +11,14 @@ export const ContainerRegister = styled.div`
         gap: 1.75rem;
         max-width: 25rem;
         margin-bottom: 2rem;
+        overflow-y: auto;
+        max-height: 87vh;
 
-    @media (max-width: 768px) {
-      background-color: transparent !important;
-      box-shadow: none;
-    }
+        @media (max-width: 768px) {
+        background-color: transparent !important;
+        box-shadow: none;
+        max-height: unset;
+        }
 
         @media (max-width: 768px){
             background-color: transparent;

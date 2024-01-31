@@ -106,10 +106,13 @@ export const ContainerLogin = styled.div`
     border-radius: .5rem !important;
     box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 16px;
     background: white;
+    overflow-y: auto;
+    max-height: 87vh;
 
     @media (max-width: 768px) {
       background-color: transparent !important;
       box-shadow: none;
+      max-height: 100vh;
     }
 
     .logo-pre-login {
@@ -137,11 +140,14 @@ export const ContainerLogin = styled.div`
     position: relative;
     padding: 0px !important;
     border-radius: .5rem !important;
+    overflow-y: auto;
+    max-height: 87vh;
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
+      max-height: 100vh;
     }
 
     div.pai {

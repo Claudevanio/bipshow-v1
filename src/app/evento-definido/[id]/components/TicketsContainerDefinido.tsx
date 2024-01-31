@@ -539,7 +539,7 @@ export function TicketsContainerDefinido ({
                   onClick={() => console.log(ticketsPurchase)}       
                 >
                   <Image
-                    src={'/MoneyIcon-gray.svg'}
+                    src={'/moneyIcon-gray.svg'}
                     alt="Logo"
                     width={25}
                     height={20}
@@ -680,7 +680,7 @@ export function TicketsContainerDefinido ({
                   onClick={() => console.log(ticketsPurchase)}       
                 >
                   <Image
-                    src={'/MoneyIcon-gray.svg'}
+                    src={'/moneyIcon-gray.svg'}
                     alt="Logo"
                     width={25}
                     height={20}
@@ -876,7 +876,7 @@ export function TicketsContainerDefinido ({
               className='w-fit'
             >
               <Image
-                src={'/MoneyIcon-gray.svg'}
+                src={'/moneyIcon-gray.svg'}
                 alt="Money"
                 width={25}
                 height={20}

@@ -54,49 +54,8 @@ export const FormAddress: React.FC<FormAdressProps> = ({ defaultValue, variant =
     }
   }, [getValues, setValue]);
 
-  
-  const handleChangeCountry = (e: any) => { };
-
-  const isCountry = watch("idPais");
-
-  useEffect(() => {
-    if (isCountry) {
-      const isFindCountry = countries?.find(
-        (country) => country.id === isCountry
-      );
-
-      setValue("DD", isFindCountry?.codigoArea);
-
-      if (isFindCountry) {
-        onSelectCountry(isFindCountry);
-      }
-    }
-    // eslint-disable-next-
-  }, [isCountry]);
-
   return (
     <ContainerFormAddress variant={variant}>
-      
-      <Select
-        name="idPais"
-        id='idPais'
-        defaultValue={defaultValue?.idPais}
-        disabled={false}
-        loading={false}
-        label="País"
-        options={
-          countries?.map((country) => ({
-            value: country.id,
-            innerText: country.nomePais,
-          })) ?? []
-        }
-        rules={{
-          required: {
-            value: true,
-            message: 'País inválido. Verifique',
-          },
-        }}
-      />
       
       <Input
         type="tel"

@@ -1,5 +1,4 @@
 export const CPFMask = (v: string) => {
-  debugger;
   let isValue = v;
   isValue = isValue.replace(/\D/g, '');
   isValue = isValue.replace(/^(\d{3})(\d)/g, '$1.$2');

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Button } from '..';
 import ptBr from 'dayjs/locale/pt-br';
 import Link from 'next/link';
+import { baseUrlImages } from '@/constants';
 
 dayjs.locale(ptBr);
 
@@ -19,7 +20,8 @@ export const EventCard = ({ event }: EventCardProps) => {
           className='w-[100%] h-[100%] relative z-[2] rounded-xl overflow-hidden'
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={event.imagens.minicapa.link} alt="Descrição da imagem" 
+          <img src={event.imagens.minicapa.link[0] === '/' ? baseUrlImages + event.imagens.minicapa.link : `${event.imagens.minicapa.link}`
+          } alt="Descrição da imagem" 
             className='w-[100%] h-48 bg-background rounded-xl relative  transition-all duration-500 ease-in-out transform group-hover:scale-105 object-fill'/>
           {/* <div
             style={{

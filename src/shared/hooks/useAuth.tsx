@@ -659,6 +659,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           isFormattedUser.documentoEstrangeiro = data.numeroDoc;
           isFormattedUser.idPais = data.idPais;
           isFormattedUser.idTipoDocumento = data.idTipoDocumento;
+          delete isFormattedUser.endereco
         }
 
         let result = null;
@@ -795,6 +796,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const handleNextStepRegister = useCallback(
     async (data: IUser, onClickPurchase?: () => void, finish?: boolean) => {
       try {
+        debugger;
         setIsLoadingCountry(true);
         const isVerifyForNextStep = isSelectCountry.nomePais === 'Brasil' ? data.CPF : data.numeroDoc;
         if (data.nome && isVerifyForNextStep && isStepper === 0) {
@@ -833,7 +835,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           setIsLoading(false);
           setIsStepper(2);
         }
+        if(data.idTipoDocumento && isTypesDoc.length > 0 && isStepper === 0){
+          setIsStepper(2);
+          return
+        }
         if (data.endereco && isStepper === 2) {
+          setIsStepper(3);
+        }
+        if(isStepper === 2 && data.idTipoDocumento && isTypesDoc.length > 0){
           setIsStepper(3);
         }
         if (isStepper === 3) {
@@ -1035,6 +1044,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const handleNextStep = useCallback(
     async (data: IUser, toImageAvatar?: string, onClickPurchase?: () => void) => {
       let defaultValues = {};
+
       try {
         if (data.cpf && data.type === 'cpf' && !toImageAvatar) {
           setIsLoading(true);
@@ -1042,23 +1052,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
             data.cpf.replace(/[^\d]/g, ''),
           );
 
-          // const { usuario } = await handleCheckCountExistV2(
-          //   data.cpf.replace(/[^\d]/g, ''),
-          // );
+          const { usuario } = await handleCheckCountExistV2(
+            data.cpf.replace(/[^\d]/g, ''),
+          );
 
-          // defaultValues = {
-          //   nome: usuario?.nome,
-          //   dataNascimentoCpf: format(
-          //     parseISO(usuario?.dataNascimento),
-          //     'dd/MM/yyyy',
-          //   ),
-          //   email: usuario?.email,
-          //   CPF: data.cpf,
-          //   idPais: usuario?.idPais,
-          // };
+          defaultValues = {
+            nome: usuario?.nome,
+            dataNascimentoCpf: format(
+              parseISO(usuario?.dataNascimento),
+              'dd/MM/yyyy',
+            ),
+            email: usuario?.email,
+            CPF: data.cpf,
+            idPais: usuario?.idPais,
+          };
 
-          // setDefaultValues(defaultValues);
-          setIsLoading(false);
+          
+          if(!exists)
+            setDefaultValues(defaultValues);
+          
+            setIsLoading(false);
           if (exists) {
             setIsStepper(1);
           } else {
@@ -1158,7 +1171,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const handleLoadTypeDocument = useCallback(
     async (country: string) => {
       try {
-        if (authentication) {
           setIsLoadingCountry(true);
           const { data } = (await api.get(
             `${GET_TYPE_DOCUMENT}/${country}`,
@@ -1167,7 +1179,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           };
 
           setIsTypesDoc(data);
-        }
         setIsLoadingCountry(false);
       } catch (err: any) {
         setIsLoadingCountry(false);

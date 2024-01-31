@@ -39,6 +39,7 @@ export interface IRegister {
     setUserEmail: (email: string) => void;
     userEmail?: string;
     defaultValues?: any;
+    clearDefaultValues: () => void;
     setDefaultValues: (data: any) => void;  
     isUserNotExistCPF?: string;
     isLoadingUpdatedAddress: boolean;
@@ -200,7 +201,12 @@ export const RegisterProvider: React.FC<{ children: React.ReactNode }> = ({
   const handleLogoutUser = useCallback(() => {
     localStorage.setItem('shouldChangeText', 'true');
     Cache.remove({key: '@tokenUser'})
-    setIsUser(undefined)
+    router.push('/');
+    setTimeout(() => {
+      setIsUser(undefined);
+      apiTokeUser.defaults.headers.Authorization = '';
+      // window.location.reload();
+    }, 100);
   }, []);
 
   const handleUpdateUser = useCallback(
@@ -240,7 +246,6 @@ export const RegisterProvider: React.FC<{ children: React.ReactNode }> = ({
           )) as { data: { sucesso: boolean; mensagem?: string } };
 
           if (resultData.sucesso) {
-            isUpdatedUser.imagem = isUser.imagem;
             setIsUser(isUpdatedUser);
             callErrorDialogComponent('Dados atualizados com sucesso.', TypeEnum.SUCCESS);
           } else {
@@ -267,6 +272,10 @@ export const RegisterProvider: React.FC<{ children: React.ReactNode }> = ({
     // }
   }, [isResult]);
 
+  const clearDefaultValues = () => {
+    setDefaultValues({});
+  };
+
   return (
     <RegisterContext.Provider
       value={{
@@ -292,6 +301,7 @@ export const RegisterProvider: React.FC<{ children: React.ReactNode }> = ({
         userEmail,
         setUserEmail,
         isLoadingUpdatedAddress,
+        clearDefaultValues,
       }}
     >
       {children}

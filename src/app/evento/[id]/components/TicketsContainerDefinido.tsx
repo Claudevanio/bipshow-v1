@@ -582,7 +582,7 @@ export function TicketsContainerDefinido ({
                     }}       
                 >
                   <Image
-                    src={'/MoneyIcon-gray.svg'}
+                    src={'/moneyIcon-gray.svg'}
                     alt="Logo"
                     width={25}
                     height={20}
@@ -727,7 +727,7 @@ export function TicketsContainerDefinido ({
                     }} 
                 >
                   <Image
-                    src={'/MoneyIcon-gray.svg'}
+                    src={'/moneyIcon-gray.svg'}
                     alt="Logo"
                     width={25}
                     height={20}
@@ -928,7 +928,7 @@ export function TicketsContainerDefinido ({
                 }} 
             >
               <Image
-                src={'/MoneyIcon-gray.svg'}
+                src={'/moneyIcon-gray.svg'}
                 alt="Money"
                 width={25}
                 height={20}

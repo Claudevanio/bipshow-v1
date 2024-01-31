@@ -352,7 +352,7 @@ export function TicketsContainer ({
                   onClick={handleShowModal}       
                 >
                   <Image
-                    src={'/MoneyIcon-gray.svg'}
+                    src={'/moneyIcon-gray.svg'}
                     alt="Logo"
                     width={25}
                     height={20}

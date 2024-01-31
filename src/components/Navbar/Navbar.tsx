@@ -31,7 +31,7 @@ export function Navbar() {
 
   const [locationValue, setLocationValue] = useState({city: location?.city, uf: location?.uf})
 
-  const {user, handleLoadUser} = useRegister()
+  const {user, handleLoadUser, clearDefaultValues} = useRegister()
   
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
   const [authType, setAuthType] = useState<'login' | 'register'>('login')
@@ -278,12 +278,16 @@ export function Navbar() {
       </nav>
       <Modal
         open={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
+        onClose={() => {
+          clearDefaultValues()
+          setIsAuthModalOpen(false)
+        }}
       >
         <div
           className='flex items-center justify-center w-full h-full'
         >
-          <div
+         {
+         isAuthModalOpen && <div
             className='bg-white md:bg-[#00000000] w-full h-full overflow-y-auto md:overflow-hidden md:h-fit md:w-fit p-4 md:rounded-lg relative'
           >
             <LoginAndRegister
@@ -291,16 +295,22 @@ export function Navbar() {
               onClose={() => setIsAuthModalOpen(false)}
               handleChangeType={(type) => setAuthType(type)}
               onClickPurchase={() => {
+                debugger;
                 setIsAuthModalOpen(false)
                 handleLoadUser()
                 // router.push('/checkout')
               }}
             />
             <Close
-              className='absolute top-4 right-4 md:top-[15%] md:right-[8%] cursor-pointer z-10 text-gray'
-              onClick={() => setIsAuthModalOpen(false)} 
+              className='absolute top-2 right-4 md:top-[15%] md:right-[8%] cursor-pointer z-10 text-gray'
+              onClick={() => {
+                debugger;
+                setIsAuthModalOpen(false)
+                clearDefaultValues()
+              }} 
             />
           </div>
+          }
         </div>
       
       </Modal>

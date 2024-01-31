@@ -61,6 +61,7 @@ export const Register: React.FC<IRegister> = ({
     createdUser,
     onAddPhoto,
     checkEmailExistente,
+    typesDoc
   } = useAuth();
 
   interface IRegisterUser extends IUser{
@@ -68,7 +69,7 @@ export const Register: React.FC<IRegister> = ({
   }
 
   const { handleSubmit, getValues, setValue } = useFormContext<IRegisterUser>();
-  const [formData, setFormData] = useState();
+  // const [formData, setFormData] = useState();
   const pathname = usePathname();
 
   const onSubmit = React.useCallback(
@@ -87,6 +88,9 @@ export const Register: React.FC<IRegister> = ({
         }
       }
       if (isStepper === 1 && !validateEmail) {
+        setValidateEmail(true);
+      }
+      if(isStepper === 0 && typesDoc?.length > 0){
         setValidateEmail(true);
       }
 
@@ -152,7 +156,7 @@ export const Register: React.FC<IRegister> = ({
               {isStepper === 4
                 ? 'Foto do rosto'
                 : isStepper === 1
-                  ? 'Valide seu E-mail'
+                  ? 'Endereço'
                   : 'Criar conta'}
             </h6>
             {isStepper === 0 && <StepOne />}
@@ -184,8 +188,13 @@ export const Register: React.FC<IRegister> = ({
                       handleChangeType('login');
                       return;
                     }
+                    if(isStepper === 2 && typesDoc?.length > 0 ){
+                      setIsStepper(0);
+                      return;
+                    }
                     setIsStepper(isStepper - 1);
-                  }}
+                }
+                }
                 />
                 // <ArrowLeft
                 //   width={32}

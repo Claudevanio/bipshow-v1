@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { AuthProvider } from "@/shared/hooks/useAuth";
 import { Loading } from "@/components/Loading";
@@ -14,7 +14,14 @@ export const LoginAndRegister: React.FC<ILoginAndRegister> = ({
     onClickPurchase,
     handleChangeType,
 }) => {
-    const { defaultValues } = useRegister();
+    const { defaultValues, setDefaultValues } = useRegister();
+
+    useEffect(() => {
+        
+        setDefaultValues({
+        });
+
+    }, []);
 
     const methods = useForm<IUser>({
         defaultValues,
